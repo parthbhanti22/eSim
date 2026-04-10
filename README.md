@@ -27,16 +27,16 @@ and **3 are documented** with upstream recommendations.
 │   ├── ENVIRONMENT_SETUP.md               # Reproduction environment instructions
 │   ├── ISSUE_CATALOGUE.md                 # Structured issue catalogue (all 8 issues)
 │   └── INVESTIGATION_REPORT.md            # Full investigation report
-├── Ubuntu/
-│   ├── install-eSim.sh                    # Patched top-level dispatcher (25.04 support)
-│   ├── install-eSim-scripts/
-│   │   └── install-eSim-25.04.sh          # New 25.04-specific installer (patched)
-│   └── patches/
-│       ├── fix-001-version-dispatch.patch # Adds 25.04 case to dispatcher
-│       ├── fix-002-pip-pep668.patch       # PEP 668 compliance (venv-based pip)
-│       ├── fix-003-qt5-availability.patch # Qt5/PyQt5 package resolution
-│       ├── fix-004-ngspice-deps.patch     # Ngspice build dependency updates
-│       └── fix-005-apt-robustness.patch   # Defensive apt error handling
+└── Ubuntu/
+    ├── install-eSim.sh                    # Patched top-level dispatcher (25.04 support)
+    ├── install-eSim-scripts/
+    │   └── install-eSim-25.04.sh          # New 25.04-specific installer (patched)
+    └── patches/
+        ├── fix-001-version-dispatch.patch # Adds 25.04 case to dispatcher
+        ├── fix-002-pip-pep668.patch       # PEP 668 compliance (venv-based pip)
+        ├── fix-003-qt5-availability.patch # Qt5/PyQt5 package resolution
+        ├── fix-004-ngspice-deps.patch     # Ngspice build dependency updates
+        └── fix-005-apt-robustness.patch   # Defensive apt error handling
 
 ```
 
