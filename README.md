@@ -59,7 +59,7 @@ and **3 are documented** with upstream recommendations.
 
 ```bash
 # Clone this fork
-git clone https://github.com/<your-username>/eSim.git -b installers
+git clone https://github.com/parthbhanti22/eSim.git -b installers
 cd eSim
 
 # The patched install-eSim.sh already includes Ubuntu 25.04 support
