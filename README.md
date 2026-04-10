@@ -37,7 +37,7 @@ and **3 are documented** with upstream recommendations.
 │       ├── fix-003-qt5-availability.patch # Qt5/PyQt5 package resolution
 │       ├── fix-004-ngspice-deps.patch     # Ngspice build dependency updates
 │       └── fix-005-apt-robustness.patch   # Defensive apt error handling
-└── email_draft.md                         # Submission email draft
+
 ```
 
 ## Issues Found
