@@ -1,0 +1,12 @@
+--- a/Ubuntu/install-eSim.sh
++++ b/Ubuntu/install-eSim.sh
+@@ -37,6 +37,10 @@
+     # Decide script based on full version
+     case $VERSION_ID in
++        "25.04")
++            # FOSSEE-FIX-ISS-001: Add Ubuntu 25.04 dispatch
++            SCRIPT="$SCRIPT_DIR/install-eSim-25.04.sh"
++            ;;
+         "22.04")
+             if [[ "$FULL_VERSION" == "22.04.4" ]]; then
+                 SCRIPT="$SCRIPT_DIR/install-eSim-22.04.sh"

@@ -17,13 +17,13 @@
 #                Anshul Verma, Shiva Krishna Sangati, Harsha Narayana P
 #  ORGANIZATION: eSim Team, FOSSEE, IIT Bombay
 #       CREATED: Sunday 25 May 2025 17:40
-#      REVISION: ---
+#      REVISION: Patched for Ubuntu 25.04 support — April 2026
 #=============================================================================
 
 # Function to detect Ubuntu version and full version string
 get_ubuntu_version() {
     VERSION_ID=$(grep "^VERSION_ID" /etc/os-release | cut -d '"' -f 2)
-    FULL_VERSION=$(lsb_release -d | grep -oP '\d+\.\d+\.\d+')
+    FULL_VERSION=$(lsb_release -d | grep -oP '\d+\.\d+(\.\d+)?' || echo "$VERSION_ID")
     echo "Detected Ubuntu Version: $FULL_VERSION"
 }
 
@@ -33,6 +33,10 @@ run_version_script() {
     
     # Decide script based on full version
     case $VERSION_ID in
+        # FOSSEE-FIX-ISS-001: Added Ubuntu 25.04 dispatch case
+        "25.04")
+            SCRIPT="$SCRIPT_DIR/install-eSim-25.04.sh"
+            ;;
         "22.04")
             if [[ "$FULL_VERSION" == "22.04.4" ]]; then
                 SCRIPT="$SCRIPT_DIR/install-eSim-22.04.sh"
@@ -48,6 +52,7 @@ run_version_script() {
             ;;
         *)
             echo "Unsupported Ubuntu version: $VERSION_ID ($FULL_VERSION)"
+            echo "Supported versions: 22.04, 23.04, 24.04, 25.04"
             exit 1
             ;;
     esac

@@ -1,0 +1,28 @@
+--- a/Ubuntu/install-eSim-scripts/install-eSim-24.04.sh
++++ b/Ubuntu/install-eSim-scripts/install-eSim-25.04.sh
+@@ -0,0 +1,25 @@
++# FOSSEE-FIX-ISS-004: Ngspice build dependencies updated for Ubuntu 25.04
++# This patch should be applied within the NGHDL install script's dependency
++# installation section. The following replaces hardcoded package names.
++#
++# Changes:
++#   - libgl1-mesa-dev → libgl-dev (canonical name on 25.04)
++#   - Added explicit texinfo dependency
++#   - Added fallback for transitional package names
++
++# In the nghdl/install-nghdl.sh dependency section, replace:
++#   sudo apt-get install -y libgl1-mesa-dev
++# with:
++#   sudo apt-get install -y libgl-dev || sudo apt-get install -y libgl1-mesa-dev
++
++# Full Ngspice dependency line for Ubuntu 25.04:
++# sudo apt-get install -y \
++#   build-essential \
++#   libreadline-dev libedit-dev libfftw3-dev \
++#   bison flex autoconf automake libtool \
++#   libx11-dev libxaw7-dev \
++#   libgl-dev \
++#   libssl-dev \
++#   texinfo \
++#   gperf \
++#   xz-utils

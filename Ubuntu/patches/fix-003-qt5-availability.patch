@@ -1,0 +1,27 @@
+--- a/Ubuntu/install-eSim-scripts/install-eSim-24.04.sh
++++ b/Ubuntu/install-eSim-scripts/install-eSim-25.04.sh
+@@ -188,11 +188,22 @@
+     echo "Installing Psutil.........................."
+     sudo apt-get install -y python3-psutil
+ 
+-    echo "Installing PyQt5..........................."
+-    sudo apt-get install -y python3-pyqt5
++    # FOSSEE-FIX-ISS-003: Qt5 / PyQt5 availability on Ubuntu 25.04
++    # Install Qt5 runtime libraries (t64 ABI names for 25.04)
++    echo "Installing Qt5 runtime libraries..........."
++    sudo apt-get install -y \
++        libxcb-xinerama0 libxcb1 libx11-xcb1 libxcb-glx0 \
++        libxcb-util1 libxrender1 libxi6 libxrandr2 \
++        libqt5gui5t64 libqt5core5t64 libqt5widgets5t64 \
++        qtbase5-dev qt5-qmake 2>/dev/null || \
++    sudo apt-get install -y \
++        libqt5gui5 libqt5core5a libqt5widgets5 2>/dev/null || true
++
++    echo "Installing PyQt5 (via apt or pip)..........."
++    if ! sudo apt-get install -y python3-pyqt5 2>/dev/null; then
++        echo "python3-pyqt5 not available via apt. Installing via pip in venv..."
++        "$config_dir/env/bin/pip" install PyQt5
++    fi
+ 
+     echo "Installing Matplotlib......................"
+     sudo apt-get install -y python3-matplotlib

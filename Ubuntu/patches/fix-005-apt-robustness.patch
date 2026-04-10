@@ -1,0 +1,32 @@
+--- a/Ubuntu/install-eSim-scripts/install-eSim-24.04.sh
++++ b/Ubuntu/install-eSim-scripts/install-eSim-25.04.sh
+@@ -10,6 +10,27 @@
+ error_exit()
+ {
+ 
+     echo -e "\n\nError! Kindly resolve above error(s) and try again."
+     echo -e "\nAborting Installation...\n"
+ 
+ }
+ 
++# FOSSEE-FIX-ISS-007: Defensive apt install wrapper with --fix-broken recovery
++safe_apt_install()
++{
++    local attempt=0
++    local max_attempts=2
++
++    while [ $attempt -lt $max_attempts ]; do
++        if sudo apt-get install -y "$@"; then
++            return 0
++        fi
++
++        attempt=$((attempt + 1))
++        echo "WARNING: apt-get install failed (attempt $attempt/$max_attempts). Attempting recovery..."
++        sudo dpkg --configure -a 2>/dev/null || true
++        sudo apt-get --fix-broken install -y 2>/dev/null || true
++        sudo apt-get update 2>/dev/null || true
++    done
++
++    echo "ERROR: apt-get install failed after $max_attempts attempts for packages: $*"
++    return 1
++}
